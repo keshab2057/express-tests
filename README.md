@@ -1,1 +1,12 @@
 # express-tests
+-create git project
+-git clone git project
+-open git project in vscode(README.MD is shown)
+-npm init -y
+-npm i express --save(package.json,package-lock.json,node_modules)
+-npm i nodemon --save-dev
+-update scripts
+-"dev":"nodemon index.js"
+-"start":"node index.js
+-add .gitignore file
+-include node_modules
