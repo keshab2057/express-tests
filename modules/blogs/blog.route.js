@@ -4,13 +4,24 @@ router.get("/", (req, res) => {
   res.json({ msg: "hello from blog router" });
 });
 
-const mw = ((req,res,next)=>{
-  req.body.country = "Nepal";
-  next();
+
+//const userRole = ["user"]; //req headers
+//cosnt systemRole = ["adimi"] //passed in mw(checkRole) hardcoded
+//const checkRole =(userRole,systemRole)=>
+//userRole.some((role)=>systemRole.includes(role);
+  const checkRole = ((sysRole)=>{
+    return(req,res,next)=>{
+      const userRole = req.headers.role.split(",");
+      const result = sysRole.some((role)=>userRole.includes(role));
+      if(!result) throw new Error("Permission Denied");
+      
+      next();
+    };
 });
 
-router.post("/",mw,(req, res,next) => {//middleware use
+router.post("/",checkRole (["admin"]),(req,res,next) => {//middleware use
   try{
+    //req params,query,body,headers
     const {title} = req.body;
     if(!title) throw new Error("title is missing");
     console.log(req.body);
