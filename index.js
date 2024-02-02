@@ -6,6 +6,11 @@ app.use(express.json());//req body
 
 app.use("/assets",express.static("public"))//static files
 
+app.use((req,res,next)=>{
+req.body.currency = "NPR";
+next();
+});
+
 app.use("/",indexRouter);
 
 app.use((err,req,res,next)=>{

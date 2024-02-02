@@ -4,10 +4,16 @@ router.get("/", (req, res) => {
   res.json({ msg: "hello from blog router" });
 });
 
-router.post("/",(req, res,next) => {
+const mw = ((req,res,next)=>{
+  req.body.country = "Nepal";
+  next();
+});
+
+router.post("/",mw,(req, res,next) => {//middleware use
   try{
     const {title} = req.body;
     if(!title) throw new Error("title is missing");
+    console.log(req.body);
     res.json({ msg: "hello from post router" });
   }catch(err){
 next(err);
