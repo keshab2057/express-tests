@@ -4,7 +4,7 @@ const app = express();
 const PORT = 8000;
 app.use(express.json());//req body
 
-
+app.use("/assets",express.static("public"))//static files
 
 app.use("/",indexRouter);
 
