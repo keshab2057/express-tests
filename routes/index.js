@@ -6,13 +6,17 @@ const tagRouter = require("../modules/tags/tag.route");
 const userRouter = require("../modules/users/user.route");
 const roleRouter = require("../modules/roles/role.route");
 
+const apiVersion = "/api/v1";
+
 router.get("/",(req,res)=>{
 res.json({msg:"hello from router index"});
 });
-router.use("/blogs",blogRouter);
-router.use("/tags",tagRouter);
-router.use("/users",userRouter);
-router.use("/roles",roleRouter);
+
+//API should always have version
+router.use(`${apiVersion}/blogs`,blogRouter);
+router.use(`${apiVersion}/tags`,tagRouter);
+router.use(`${apiVersion}/users`,userRouter);
+router.use(`${apiVersion}/roles`,roleRouter);
 
 
 module.exports = router;

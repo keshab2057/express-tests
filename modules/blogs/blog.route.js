@@ -4,21 +4,40 @@ router.get("/", (req, res) => {
   res.json({ msg: "hello from blog router" });
 });
 
-router.post("/", (req, res) => {
-  res.json({ msg: "hello from post router" });
+router.post("/",(req, res,next) => {
+  try{
+    const {title} = req.body;
+    if(!title) throw new Error("title is missing");
+    res.json({ msg: "hello from post router" });
+  }catch(err){
+next(err);
+  }
 });
 
-router.put("/:id", (req, res) => {
-  res.json({ msg: "hello from put router" });
+router.put("/:id", (req, res,next) => {
+try{
+  const {title} = req.body;
+  if(!title) throw new Error("id is missing");
+    res.json({ msg: "hello from put router" });
+}catch(err){
+  next(err);
+}
+  });
+
+
+
+router.patch("/:id", (req, res,next) => {
+  try{
+    const {status} = req.body;
+    if(!status) throw new Error("title is missing");
+  req.json({msg:"hello from patch router"});
+  }catch(err){
+    next(err);
+  }
 });
 
-router.patch("/:id", (req, res) => {
-  res.json({ msg: "hello from patch router" });
-});
-
-router.delete("/:id", (req, res) => {
-  const {id} = req.params;
-  res.json({ msg: `hello from ${id} deleted` });
-});
+router.delete("/:id", (req, res,next) => {
+  res.json({ msg: "hello from delete blogs" });
+ });
 
 module.exports = router;
